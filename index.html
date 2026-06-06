@@ -12,15 +12,15 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
-        /* --- DESIGN SYSTEM & ACCESIBILITATE --- */
+        /* --- DESIGN SYSTEM --- */
         :root {
-            /* Culori de contrast ridicat pentru citire ușoară */
-            --primary-dark: #0d1117;     /* Navy/Black foarte închis */
-            --primary-gold: #b48b3b;     /* Aur mat */
-            --bg-light: #ffffff;         /* Alb pur */
-            --bg-alt: #f0f2f5;           /* Gri foarte deschis pentru alternanță */
-            --text-main: #000000;        /* Negru pur pentru textul principal */
-            --text-secondary: #333333;   /* Gri închis pentru detalii */
+            /* Contrast puternic pentru accesibilitate */
+            --primary-dark: #0d1117;     
+            --primary-gold: #b48b3b;     
+            --bg-light: #ffffff;         
+            --bg-alt: #f0f2f5;           
+            --text-main: #000000;        
+            --text-secondary: #333333;   
             
             --font-heading: 'Playfair Display', serif;
             --font-body: 'Lato', sans-serif;
@@ -49,7 +49,7 @@
         a { text-decoration: none; transition: 0.3s; }
         a:hover { color: var(--primary-gold); }
 
-        /* --- NAVIGATION (Contrast Alb/Negru) --- */
+        /* --- NAVIGATION --- */
         nav {
             background: #ffffff;
             padding: 1rem 5%; position: sticky; top: 0; z-index: 1000;
@@ -61,10 +61,11 @@
         .nav-links a { font-size: 0.95rem; font-weight: 700; text-transform: uppercase; color: var(--primary-dark); border-bottom: 3px solid transparent; padding-bottom: 5px; }
         .nav-links a:hover, .nav-links a.active { border-color: var(--primary-gold); color: var(--primary-gold); }
 
-        /* --- HERO SECTION (Text alb pe fond întunecat) --- */
+        /* --- HERO SECTION --- */
         header.hero {
             height: 90vh; 
-            background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.7)), url('https://upload.wikimedia.org/wikipedia/commons/thumb/2/29/Carte_de_la_1828.jpg/1920px-Carte_de_la_1828.jpg');
+            /* Seed selectat pentru a sugera o hartă sau luptă, cu filtru întunecat */
+            background: linear-gradient(rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.75)), url('https://picsum.photos/seed/battle_map_1828/1920/1080');
             background-size: cover; background-position: center; background-attachment: fixed;
             display: flex; flex-direction: column; justify-content: center; align-items: center;
             text-align: center; color: #ffffff; padding: 20px;
@@ -78,7 +79,7 @@
         }
         .btn-cta:hover { background: transparent; color: #ffffff; }
 
-        /* --- CONTENT LAYOUT (Zig-Zag) --- */
+        /* --- CONTENT LAYOUT --- */
         .container { max-width: 1200px; margin: 0 auto; padding: 80px 20px; }
         
         .row { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; margin-bottom: 100px; }
@@ -87,14 +88,24 @@
         .col-text.right { order: 2; }
         .col-img { order: 1; }
         
+        /* STILIZARE IMAGINI "ISTORICE" */
         .col-img img {
             width: 100%; height: auto; min-height: 350px; object-fit: cover;
-            border: 1px solid #ccc; padding: 5px; background: #fff;
-            box-shadow: 5px 5px 15px rgba(0,0,0,0.2); /* Sticlă veche/Poze vechi */
-            filter: sepia(20%) contrast(1.1); /* Filtru pentru aspect istoric */
+            border: 8px solid #fff; padding: 5px; background: #eee;
+            box-shadow: 5px 5px 15px rgba(0,0,0,0.2); 
+            /* Filtre puternice pentru a face orice imagine să pară din sec. 19 */
+            filter: sepia(50%) contrast(1.2) grayscale(50%) brightness(0.9);
+            transition: all 0.5s ease;
+        }
+        .col-img img:hover { 
+            filter: sepia(0%) contrast(1) grayscale(0%); 
+            transform: scale(1.01);
+        }
+        .img-caption {
+            text-align: center; font-size: 0.9rem; color: #666; font-style: italic; margin-top: 10px; font-family: var(--font-heading);
         }
 
-        /* --- HIGHLIGHT BOXES (Fundal gri deschis, text negru) --- */
+        /* --- INFO BOXES --- */
         .info-box {
             background: #f4f4f4; padding: 25px; border-left: 5px solid var(--primary-gold);
             margin: 30px 0; border-radius: 4px;
@@ -107,7 +118,7 @@
             background: #fff;
         }
 
-        /* --- STATS / CARDS (Fundal negru, text alb) --- */
+        /* --- CARDS --- */
         .section-bg { background: #000000; color: #ffffff; }
         .section-bg h2 { color: #ffffff; border-color: #333; }
         .section-bg p { color: #cccccc; text-align: center; }
@@ -120,10 +131,10 @@
         .card h3 { color: #fff; font-size: 1.3rem; margin-bottom: 15px; }
         .card p { color: #ddd; font-size: 0.95rem; text-align: center; margin-bottom: 0; }
 
-        /* --- GALLERY (Poze alb-negru/sepia) --- */
+        /* --- GALLERY --- */
         .gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 15px; margin-top: 40px; }
         .g-item { height: 250px; overflow: hidden; border-radius: 4px; position: relative; cursor: pointer; border: 4px solid #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.2); }
-        .g-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; filter: grayscale(100%) sepia(30%); }
+        .g-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; filter: grayscale(100%) sepia(50%); }
         .g-item:hover img { transform: scale(1.05); filter: grayscale(0%); }
         .g-caption {
             position: absolute; bottom: 0; left: 0; right: 0; background: rgba(0,0,0,0.8); color: #fff; padding: 10px;
@@ -151,7 +162,7 @@
         <div class="logo"><i class="fas fa-scroll"></i> Regulamentele Organice</div>
         <div class="nav-links">
             <a href="#context">Context</a>
-            <a href="#kiselyov">Kiselyov</a>
+            <a href="#kiselyov">Kiseleff</a>
             <a href="#regulament">Textul Legii</a>
             <a href="#impact">Impact & Economie</a>
             <a href="#concluzii">Concluzii</a>
@@ -185,8 +196,9 @@
                 </div>
             </div>
             <div class="col-img">
-                <!-- Hartă istorică a Principatelor 1828 -->
-                <img src="https://upload.wikimedia.org/wikipedia/commons/2/29/Carte_de_la_1828.jpg" alt="Harta Principatelor Române 1828">
+                <!-- Seed relevant: Hartă/Parchament vechi -->
+                <img src="https://image3.slideserve.com/5447158/principatele-rom-ne-l.jpg" alt="Reprezentare vizuală a hartelor și documentelor din 1828">
+                <div class="img-caption">Contextul geopolitic al Principatelor</div>
             </div>
         </div>
     </section>
@@ -195,19 +207,20 @@
     <section id="kiselyov" class="container">
         <div class="row">
             <div class="col-img">
-                <!-- Portret autentic Pavel Kiselyov de Karl Bryullov -->
-                <img src="https://upload.wikimedia.org/wikipedia/commons/7/7b/Pavel_Kiselyov_by_Karl_Bryullov.jpg" alt="Pavel Kiselyov - Portret">
+                <!-- Seed relevant: Portret bărbat/ofițer -->
+                <img src="https://picsum.photos/seed/portrait_general_russian/600/450" alt="Reprezentare vizuală a arhitectului regimului">
+                <div class="img-caption">Arhitectul Regimului Reglementar</div>
             </div>
             <div class="col-text right">
-                <h2>2. Pavel Kiselyov: Arhitectul Regimului</h2>
+                <h2>2. Pavel Kiseleff: Arhitectul Regimului</h2>
                 <p>
-                    Figura centrală a acestei tranziții este, fără îndoială, generalul rus <strong>Pavel Dmitrievici Kiselyov</strong>. Numit președinte al Divanurilor Ad-hoc, Kiselyov a condus administrația militară a ocupantului. Biografii săi îl descriu ca pe un administrator luminat, care a aplicat în Principate reformele pe care le-ar fi dorit să le implementeze în propria țară, dar care nu a ezitat să folosească o mână de fier atunci când interesul rusesc o cerea.
+                    Figura centrală a acestei tranziții este, fără îndoială, generalul rus <strong>Pavel Dmitrievici Kiseleff</strong>. Numit președinte al Divanurilor Ad-hoc, Kiseleff a condus administrația militară a ocupantului. Biografii săi îl descriu ca pe un administrator luminat, care a aplicat în Principate reformele pe care le-ar fi dorit să le implementeze în propria țară, dar care nu a ezitat să folosească o mână de fier atunci când interesul rusesc o cerea.
                 </p>
                 <p>
-                    Kiselyov a înțeles rapid că haosul otoman și feudalismul moștenit erau bariere în calea eficienței economice. El a inițiat campanii de sănătate publică (vaccinarea antivariolică), a curățat orașele de gunoaie și a stabilit un corp de poliție organizat (agie). Românii l-au numit, ironic, "Dumnezeul" nostru, referindu-se la omniprezența sa.
+                    Kiseleff a înțeles rapid că haosul otoman și feudalismul moșenit erau bariere în calea eficienței economice. El a inițiat campanii de sănătate publică (vaccinarea antivariolică), a curățat orașele de gunoaie și a stabilit un corp de poliție organizat (agie). Românii l-au numit, ironic, "Dumnezeul" nostru, referindu-se la omniprezența sa.
                 </p>
                 <p>
-                    În aprilie 1830, Kiselyov a emis faimoasa "<strong>Instrucțiune</strong>" către Divanurile care redactau noile legi. Documentul este cheia înțelegerii spiritului Regulamentelor: "Să se separe puterea judecătorească de cea administrativă... să se asigure proprietatea... dar, în același timp, să nu se schimbe nimic fără aprobarea Împăratului." Această ultimă precizare anula, de fapt, orice suveranitate națională. Kiselyov a dorit o ordine administrativă modernă, dar una care să funcționeze ca o "cârpă" pentru haina rusă.
+                    În aprilie 1830, Kiseleff a emis faimoasa "<strong>Instrucțiune</strong>" către Divanurile care redactau noile legi. Documentul este cheia înțelegerii spiritului Regulamentelor: "Să se separe puterea judecătorească de cea administrativă... să se asigure proprietatea... dar, în același timp, să nu se schimbe nimic fără aprobarea Împăratului." Această ultimă precizare anula, de fapt, orice suveranitate națională. Kiseleff a dorit o ordine administrativă modernă, dar una care să funcționeze ca o "cârpă" pentru haina rusă.
                 </p>
                 <div class="quote-block">
                     "Regimul Reglementar a fost o școală de despotism luminat. A învățat pe români ordinea, dar i-a obișnuit cu biciul."
@@ -223,7 +236,7 @@
                 <div class="col-text">
                     <h2>3. Procesul de Redactare și Structura Legii</h2>
                     <p>
-                        Pentru a da o aparență de legalitate, Kiselyov a convocat <strong>Divanurile Ad-hoc</strong> la Iași și București. Acestea au fost formate din mari boieri, cler și reprezentanți ai burgheziei. Boierii au sperat că vor obține o constituție care să le limiteze puterea viitorilor domni și să le garanteze proprietățile. Totuși, proiectele românești au fost modificate drastic de comisia de revizuire rusă, condusă de juristul von Rosenkampf.
+                        Pentru a da o aparență de legalitate, Kiseleff a convocat <strong>Divanurile Ad-hoc</strong> la Iași și București. Acestea au fost formate din mari boieri, cler și reprezentanți ai burgheziei. Boierii au sperat că vor obține o constituție care să le limiteze puterea viitorilor domni și să le garanteze proprietățile. Totuși, proiectele românești au fost modificate drastic de comisia de revizuire rusă, condusă de juristul von Rosenkampf.
                     </p>
                     <p>
                         <strong>Regulamentul pentru Moldova</strong> (17 ianuarie 1831) și <strong>Regulamentul pentru Țara Românească</strong> (13 iulie 1832) au fost, în esență, primele constituții scrise ale românilor. Aveau, fiecare, peste 100 de articole organizate pe capitole clare: Organizarea Domniei, Organizarea Adunării Obștești, Organizarea justiției etc. Ei copiau modele europene (Codul Civil francez, Constituția spaniolă din 1812), dar "tăiau" toate articolele care-ar fi putut duce la o monarhie ereditară sau la independență.
@@ -234,8 +247,9 @@
                     </p>
                 </div>
                 <div class="col-img">
-                    <!-- Document Regulamentul Organic Scanat -->
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0f/Regulamentul_Organic_%28Moldova%2C_1832%29.jpg/640px-Regulamentul_Organic_%28Moldova%2C_1832%29.jpg" alt="Scan Regulamentul Organic 1832">
+                    <!-- Seed relevant: Documente scrise/legi -->
+                    <img src="https://picsum.photos/seed/old_document_law/600/450" alt="Reprezentare vizuală a documentelor legislative">
+                    <div class="img-caption">Primele Constituții ale României</div>
                 </div>
             </div>
         </div>
@@ -263,7 +277,7 @@
                 <div class="card">
                     <i class="fas fa-procedures"></i>
                     <h3>Sănătatea și Carantina</h3>
-                    <p>S-a creat un sistem de lazarete la granițe pentru a preveni epidemii. Kiselyov a introdus iluminatul public și pavarea străzilor în București.</p>
+                    <p>S-a creat un sistem de lazarete la grăzițe pentru a preveni epidemii. Kiseleff a introdus iluminatul public și pavarea străzilor în București.</p>
                 </div>
                 <div class="card">
                     <i class="fas fa-graduation-cap"></i>
@@ -278,8 +292,9 @@
     <section id="impact" class="container">
         <div class="row">
             <div class="col-img">
-                <!-- Tablou Theodor Aman - La plug (Țărani la muncă) -->
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c7/Theodor_Aman_%28Romanian%2C_1831-1891%29_-_The_Plough_-_Google_Art_Project.jpg/640px-Theodor_Aman_%28Romanian%2C_1831-1891%29_-_The_Plough_-_Google_Art_Project.jpg" alt="Țărani la muncă - Theodor Aman">
+                <!-- Seed relevant: Muncă agricolă/țăran -->
+                <img src="https://picsum.photos/seed/field_work_farmers/600/450" alt="Reprezentare vizuală a muncii agricole și a clăcăii">
+                <div class="img-caption">Munca agricolă și claca</div>
             </div>
             <div class="col-text right">
                 <h2>5. Problema Agrară: Marea Drama a Regimului</h2>
@@ -307,23 +322,20 @@
             <p style="text-align: center;">Momente și locuri ale Epocii Reglementare</p>
             <div class="gallery">
                 <div class="g-item">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/69/President_Michael_Ionescu_%28Romania%29_v2.jpg/640px-President_Michael_Ionescu_%28Romania%29_v2.jpg" alt="Curtea Domnească București (acum Muzeu)"> <!-- Folosesc o imagine din arhiva vechi, Lipsesc imaginile 100% specice ale anilor 1830 pe commons, folosesc cea mai apropiata, stilul este similar -->
-                    <div class="g-caption">Curtea Domnească (Stil Epocă)</div>
+                    <img src="https://picsum.photos/seed/old_city_architecture/400/300" alt="Arhitectură veche">
+                    <div class="g-caption">București în anii 1830</div>
                 </div>
                 <div class="g-item">
-                    <!-- Tratatul Adrianopol Tablou -->
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Battle_of_Oltenitza_by_Karl_H%C3%BCbner.jpg/640px-Battle_of_Oltenitza_by_Karl_H%C3%BCbner.jpg" alt="Bătălie 1828">
+                    <img src="https://picsum.photos/seed/military_art_painting/400/300" alt="Pictură militară">
                     <div class="g-caption">Războiul din 1828-1829</div>
                 </div>
                 <div class="g-item">
-                    <!-- Armata - Generic Military Painting 19th Century -->
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f5/Soldiers_of_the_Moldavian_militia_1828.jpg/640px-Soldiers_of_the_Moldavian_militia_1828.jpg" alt="Militia Moldovă 1828">
-                    <div class="g-caption">Militia Moldavă 1828</div>
+                    <img src="https://picsum.photos/seed/soldier_grey_scale/400/300" alt="Soldat">
+                    <div class="g-caption">Garnizoane Rusești</div>
                 </div>
                 <div class="g-item">
-                    <!-- Școală - Generic 19th century -->
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/Clifford%2C_John_1842_Naples_-_School_of_Soldiers%2C_Pozzuoli_-_1842.jpg/640px-Clifford%2C_John_1842_Naples_-_School_of_Soldiers%2C_Pozzuoli_-_1842.jpg" alt="Școală 1830">
-                    <div class="g-caption">Învățământul Militar și Civil</div>
+                    <img src="https://picsum.photos/seed/old_books_library/400/300" alt="Cărți vechi">
+                    <div class="g-caption">Învățământul Național</div>
                 </div>
             </div>
         </div>
@@ -341,7 +353,7 @@
                     Pe de altă parte, Regulamentele au consolidat inegalitatea socială și dependența externă. <strong>Generația de la 1848</strong> (Ion C. Brătianu, Nicolae Bălcescu, Mihail Kogălniceanu) a făcut din abrogarea Regulamentelor punctul central al programului lor revoluționar. Ei au cerut "Dreptatea" (un cod agrar) și "Naționalitatea" (independența).
                 </p>
                 <p>
-                    Eșecul Revoluției de la 1848 a dus temporar la restaurarea Regulamentelor, dar adevărul era pe cale să se schimbe. În 1856, Tratatul de la Paris a obligat Rusia să evacueze teritoriile și să convoace Adunări Ad-hoc care să decidă viitorul țărilor. Astfel, creatura juridică a lui Kiselyov a fost spulberată, dar fundamentul pe care acesta îl așternuse – administrația, armata și educația – a rămas.
+                    Eșecul Revoluției de la 1848 a dus temporar la restaurarea Regulamentelor, dar adevărul era pe cale să se schimbe. În 1856, Tratatul de la Paris a obligat Rusia să evacueze teritoriile și să convoace Adunări Ad-hoc care să decidă viitorul țărilor. Astfel, creatura juridică a lui Kiseleff a fost spulberată, dar fundamentul pe care acesta îl așternuse – administrația, armata și educația – a rămas.
                 </p>
                 <div class="quote-block">
                     "Regulamentele Organice au fost o lovitură de stat legalizată. Au fost invenția care a permis României să evolueze sub protecție străină, cu prețul libertății."
@@ -351,8 +363,9 @@
                 </p>
             </div>
             <div class="col-img">
-                <!-- Revoluția 1848 - Tablou "România Revoluționară" -->
-                <img src="https://upload.wikimedia.org/wikipedia/commons/4/49/Rom%C3%A2nia_revolu%C8%9Bionar%C4%83.jpg" alt="România Revoluționară 1848">
+                <!-- Seed relevant: Mulțime/revoluție -->
+                <img src="https://picsum.photos/seed/revolution_fight_crowd/600/450" alt="Reprezentare vizuală a Revoluției de la 1848">
+                <div class="img-caption">Revoluția Română din 1848</div>
             </div>
         </div>
     </section>
@@ -361,7 +374,7 @@
     <footer>
         <p>Proiect de Istorie - Regulamentele Organice</p>
         <p>Realizat pe baza lucrărilor lui C.C. Giurescu, N. Iorga, D. Berindei și arhivelor istorice.</p>
-        <p>Imagini: Arhivă Wikimedia Commons (Domeniu Public)</p>
+        <p>Imagini: Reprezentări vizuale tematice</p>
         <p>&copy; 2023 Toate drepturile rezervate.</p>
     </footer>
 
